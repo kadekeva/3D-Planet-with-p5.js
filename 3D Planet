@@ -1,0 +1,78 @@
+let teksturBumi;
+let teksturBulan;
+let teksturMatahari;
+
+function preload() {
+  teksturBumi = loadImage('bumi.jpg');
+  teksturMatahari = loadImage('Matahari.jpg');
+  teksturBulan = loadImage('Bulan.jpg');
+}
+
+function setup() {
+  createCanvas(1000, 720, WEBGL);
+  background(255);
+  //teksturMatahari.resize(500,500)
+  //teksturBumi.resize(100,100)
+}
+
+function draw() {
+  background(0);
+  camera(0, -500, 700, 0, 0, 0, 0, 1, 0);
+  push();
+  stroke(255);
+  rotateX(radians(90));
+  torus(500, 1);
+  pop();
+//membuat Matahari
+  push();
+  translate(0, 0);
+  rotateY(millis() * 0.001 * radians(-10));
+  texture(teksturMatahari);
+  noStroke();
+  sphere(300);
+  pop();
+  //mengambil posisi pada matahari
+  push()
+  rotateY(millis() * 0.002 * radians(25));
+  noStroke();
+  noFill()
+  sphere(20);
+  //bumi
+  push();
+  translate(-480,0);
+  texture(teksturBumi);
+  pointLight(250, 250, 250, 1, 1, 0);
+  rotateY(millis() * 0.002 * radians(30));
+  sphere(100);
+  pop();
+  pop();
+  //mengambil posisi matahari
+  push()
+  rotateY(millis() * 0.002 * radians(25));
+  noStroke();
+  noFill()
+  sphere(30);
+  
+    //mengambil posisi bumi
+    push()
+      translate(-480, 0)
+      rotateY(millis()*0.002*radians(90));
+      noStroke();
+      noFill()
+      sphere(20);
+  //bulan
+  push();
+  translate(-150, 0);
+  texture(teksturBulan);
+  pointLight(250, 250, 250, 1, 1, 0);
+  //specularMaterial('white');   
+  sphere(30);
+  pop();
+  pop();
+  pop();
+  
+}
+function mousePressed() {
+  let fs = fullscreen();
+  fullscreen(!fs);
+}
